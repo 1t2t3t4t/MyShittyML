@@ -17,7 +17,7 @@ public class Brain implements Cloneable {
 	 
 	 void tweak() {
 		 for(int i=0;i<direction.length;i++) {
-			if (0.1 >= Math.random()) {
+			if (0.05 >= Math.random()) {
 				direction[i] = new Point(plusOrMinus(1), plusOrMinus(1));
 			}
 		}

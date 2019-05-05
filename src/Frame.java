@@ -9,6 +9,7 @@ public class Frame {
 	ViewController view;
 	
 	static int DELAY = 30;
+	static boolean PAUSE = true;
 	
 	Frame() {
 		frame = new JFrame("Main");
@@ -29,13 +30,26 @@ public class Frame {
 				// TODO Auto-generated method stub
 				super.run();
 				while(true) {
-					view.preparePaint();
-					try {
-						Thread.sleep(Frame.DELAY);
-						view.repaint();
-					} catch (InterruptedException e) {
-						e.printStackTrace();
+					if (!Frame.PAUSE) {
+						execute();
+					} else {
+						try {
+							Thread.sleep(100);
+						} catch (InterruptedException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
 					}
+				}
+			}
+			
+			private void execute() {
+				view.preparePaint();
+				try {
+					Thread.sleep(Frame.DELAY);
+					view.repaint();
+				} catch (InterruptedException e) {
+					e.printStackTrace();
 				}
 			}
 		};

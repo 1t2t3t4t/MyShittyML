@@ -7,9 +7,15 @@ public class Population {
 	int n;
 	
 	Dot best;
+	int minStep = 1000;
+	
+	int allDie = 0;
+	
+	int gen = 1;
 	
 	public Population(int n) {
 		this.n = n;
+		Frame.DELAY = 0;
 		dots = new Dot[n];
 		
 		for(int i=0;i<n;i++) {
@@ -21,6 +27,9 @@ public class Population {
 	public void update(int width, int height) {
 		for(Dot dot: dots) {
 			dot.update(width, height);
+			if (dot.step > minStep) {
+				dot.dead = true;
+			}
 		}
 	}
 	
@@ -31,22 +40,33 @@ public class Population {
 		return true;
 	}
 	
+	boolean noWinner() {
+		for(Dot dot: dots) {
+			if (dot.win) return false;
+		}
+		
+		return true;
+	}
+	
 	void runBestBoi() {
 		dots = new Dot[1];
 		dots[0] = best;
 	}
 	
-	void newGen(int gen) {
-		Dot best = bestBoi();
+	void newGen() {
+		gen++;
+		double score = best != null ? best.score() : 0;
+		bestBoi();
 		System.out.println("END gen " + gen);
-		System.out.println(best.score());
-		System.out.println(best.step);
 		
- 		if (gen == 100) {
-			Frame.DELAY = 30;
-			runBestBoi();
+		if (noWinner() && best.score() <= score) {
+			allDie++;
+		}
+		
+ 		if (allDie >= 10) {
+			repop(null);
+			reset();
 		} else {
-			Frame.DELAY = 0;
 			repop(best);
 		}
 	}
@@ -61,17 +81,53 @@ public class Population {
 			}
 		}
 		
-		best = new Dot();
-		best.brain = boi.brain.clone();
+		if (best != null && boi.score() >= best.score()) {
+			best = new Dot();
+			best.brain = boi.brain.clone();
+		} else if (best == null) {
+			best = new Dot();
+			best.brain = boi.brain.clone();
+		}
+
+		System.out.println(boi.score());
+		System.out.println(boi.step);
+		System.out.println(boi.win);
+
+		if (boi.win) {
+			minStep = boi.step;
+			Frame.DELAY = 30;
+		}
+		
 		return boi;
 	}
 	
+	void reset() {
+		best = null;
+		minStep = 1000;
+		allDie = 0;
+		gen = 1;
+		Frame.DELAY = 0;
+	}
+	
 	void repop(Dot model) {
-		dots = new Dot[n];
+		Dot[] dots = new Dot[n];
 		
 		for(int i=0;i<n;i++) {
 			dots[i] = new Dot();
-			dots[i].mutate(model);
+			if (model != null) {
+				dots[i].mutate(model);
+			} 
+			
+			if (i >= n - 10) {
+				dots[i].brain.think();
+			}
 		}
+		
+		if (model != null) {
+			dots[0].brain = model.brain.clone();
+			dots[0].setChamp();	
+		}
+		
+		this.dots = dots;
 	}
 }

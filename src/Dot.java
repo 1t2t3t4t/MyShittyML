@@ -16,8 +16,8 @@ public class Dot extends Ellipse2D.Float {
 			super.config();
 			width = 10;
 			height = 10;
-			x = 530;
-			y = 500;
+			x = 700;
+			y = 700;
 			color = Color.red;
 		}
 	};
@@ -45,6 +45,11 @@ public class Dot extends Ellipse2D.Float {
 		x = 50;
 		y = 50;
 		color = Color.blue;
+	}
+	
+	void setChamp() {
+		champion = true;
+		color = Color.yellow;
 	}
 	
 	void kill() {
@@ -79,10 +84,9 @@ public class Dot extends Ellipse2D.Float {
 		double score = 0.0;
 		Point2D p = new Point((int)x, (int)y);
 		Point2D gp = new Point((int)Dot.goal.x, (int)Dot.goal.y);
-		score += 1000.0 / p.distance(gp);
+		score += 1000.0 / (p.distance(gp) + 1);
 		if (win) {
-			score += 1000.0 / p.distance(gp);
-			score += 300 * 1000.0 / step;
+			score += 500 * 1000.0 / (step);
 		} 
 		return score;
 	}
