@@ -25,7 +25,6 @@ public class Main {
 
 			@Override
 			public void mousePressed(MouseEvent e) {
-				// TODO Auto-generated method stub
 				System.out.println("pressed");
 				minx = e.getX();
 				miny = e.getY();
@@ -33,7 +32,6 @@ public class Main {
 
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				// TODO Auto-generated method stub
 				System.out.println("release");
 				maxx = e.getX();
 				maxy = e.getY();
@@ -42,13 +40,11 @@ public class Main {
 
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				// TODO Auto-generated method stub
 				
 			}
 
 			@Override
 			public void mouseExited(MouseEvent e) {
-				// TODO Auto-generated method stub
 				System.out.println("EXIT");
 			}
 		});
@@ -57,13 +53,11 @@ public class Main {
 			
 			@Override
 			public void mouseMoved(MouseEvent e) {
-				// TODO Auto-generated method stub
 				
 			}
 			
 			@Override
 			public void mouseDragged(MouseEvent e) {
-				// TODO Auto-generated method stub
 				System.out.println(e.getX());
 			}
 		});
@@ -77,13 +71,11 @@ public class Main {
 			
 			@Override
 			public void keyReleased(KeyEvent e) {
-				// TODO Auto-generated method stub
 				
 			}
 			
 			@Override
 			public void keyPressed(KeyEvent e) {
-				// TODO Auto-generated method stub
 				
 			}
 		});

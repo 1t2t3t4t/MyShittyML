@@ -1,17 +1,14 @@
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.List;
 
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.Shape;
 import java.util.ArrayList;
 
-public class ViewController extends JPanel {
+public class MainPanel extends JPanel {
 	
 	Population p;
 	
@@ -19,8 +16,7 @@ public class ViewController extends JPanel {
 	
 	boolean pause = false;
 	
-	public ViewController() {
-		// TODO Auto-generated constructor stub
+	public MainPanel() {
 		super();
 		p = new Population(1000);
 		obstrucles = new ArrayList<Shape>();
@@ -46,7 +42,6 @@ public class ViewController extends JPanel {
 	
 	@Override
 	public void paint(Graphics g) {
-		// TODO Auto-generated method stub
 		super.paint(g);
 		for(Shape s: obstrucles) {
 			Graphics2D g2 = (Graphics2D)g;

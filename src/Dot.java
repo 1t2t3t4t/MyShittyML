@@ -1,12 +1,7 @@
 import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Graphics;
 import java.awt.Point;
-import java.awt.Rectangle;
 import java.awt.geom.Ellipse2D;
 import java.awt.geom.Point2D;
-
-import javax.swing.JComponent;
 
 public class Dot extends Ellipse2D.Float {
 	
@@ -72,7 +67,7 @@ public class Dot extends Ellipse2D.Float {
 			dead = true;
 		}
 		
-		if (getX() >= width || getY() >= height || getX() <= 0 || getY() <= 0) dead = true;
+		if (getX() + this.width >= width || getY() + this.height >= height || getX() <= 0 || getY() <= 0) dead = true;
 		if (Dot.goal.contains(x, y)) {
 			win = true;
 			dead = true;

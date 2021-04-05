@@ -5,8 +5,8 @@ import javax.swing.JFrame;
 
 public class Frame {
 	
-	private JFrame frame;
-	ViewController view;
+	private final JFrame frame;
+	MainPanel view;
 	
 	static int DELAY = 30;
 	static boolean PAUSE = true;
@@ -16,7 +16,7 @@ public class Frame {
 		frame.setSize(new Dimension(800, 600));
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		view = new ViewController();
+		view = new MainPanel();
 		view.setBackground(Color.white);
 		
 		frame.add(view);
@@ -27,7 +27,6 @@ public class Frame {
 		Thread t = new Thread() {
 			@Override
 			public void run() {
-				// TODO Auto-generated method stub
 				super.run();
 				while(true) {
 					if (!Frame.PAUSE) {
@@ -36,7 +35,6 @@ public class Frame {
 						try {
 							Thread.sleep(100);
 						} catch (InterruptedException e) {
-							// TODO Auto-generated catch block
 							e.printStackTrace();
 						}
 					}

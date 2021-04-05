@@ -28,7 +28,6 @@ public class Brain implements Cloneable {
 	}
 	 
 	protected Brain clone() {
-		// TODO Auto-generated method stub
 		 Brain clone = new Brain();
 		 clone.direction = direction.clone();
 		 return clone;
